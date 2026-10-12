@@ -1,0 +1,296 @@
+<style>
+.cr{font-family:var(--font-anthropic-sans);color:var(--color-fg);display:flex;flex-direction:column;gap:var(--cds-gap-xl)}
+.cr h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
+.cr h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-xs)}
+.cr .muted{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.cr .take{font-size:var(--cds-font-size-body);max-width:60rem;margin-top:var(--cds-gap-sm)}
+.cr .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9.5rem),1fr));gap:var(--cds-gap-md)}
+.cr .card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+.cr .kpi .v{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);font-variant-numeric:tabular-nums;margin-top:var(--cds-gap-xs)}
+.cr .kpi .n{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:var(--cds-gap-xs)}
+.cr .kpi .d{font-size:var(--cds-font-size-caption);margin-top:var(--cds-gap-xs);font-variant-numeric:tabular-nums}
+.cr .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr));gap:var(--cds-gap-md)}
+.cr .tw{overflow:auto;max-height:34rem;margin-top:var(--cds-gap-sm)}
+.cr table{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption);font-variant-numeric:tabular-nums}
+.cr th{position:sticky;top:0;background:var(--color-panel);text-align:right;font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted);padding:var(--cds-pad-xs) var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);white-space:nowrap;cursor:pointer}
+.cr td{text-align:right;padding:var(--cds-pad-xs) var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.cr th.l,.cr td.l{text-align:left}
+.cr td.act{text-align:left;white-space:normal;min-width:16rem;max-width:26rem}
+.cr td.lnk{text-align:left} .cr td.lnk a{color:var(--color-fg);margin-right:var(--cds-gap-sm)}
+.cr .good{color:var(--color-ok)} .cr .bad{color:var(--color-bad)} .cr .warn{color:var(--color-warn)}
+.cr .tools{display:flex;gap:var(--cds-gap-sm);flex-wrap:wrap;margin-top:var(--cds-gap-sm)}
+.cr input,.cr select{font:inherit;font-size:var(--cds-font-size-caption);padding:var(--cds-pad-xs) var(--cds-pad-sm);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);background:var(--color-bg);color:var(--color-fg)}
+.cr .chart{position:relative;min-height:280px;margin-top:var(--cds-gap-sm)}
+.cr .tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);display:none;white-space:nowrap;z-index:2}
+.cr .legend{display:flex;flex-wrap:wrap;gap:var(--cds-gap-sm);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:var(--cds-gap-sm)}
+.cr .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.cr .sec{display:flex;flex-direction:column;gap:var(--cds-gap-md)}
+.cr .fail{display:flex;align-items:center;justify-content:center;gap:var(--cds-gap-xs);color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);min-height:6rem}
+.cr .fail i{width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)}
+[data-dash-source-state=empty]{color:transparent}
+[data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow)}
+</style>
+<div class="cr">
+  <header>
+    <h1 id="top">Monthly creative review — Meta</h1>
+    <div class="muted">Anveshan_Acqui · 1-day click · <span id="range" data-source="m_meta" class="dash-skeleton">—</span> · refreshed on the 2nd of each month</div>
+    <p class="take" id="takeaway" data-source="m_summary m_buckets"></p>
+  </header>
+
+  <section class="sec" id="headline">
+    <h2 id="kpiTitle" data-source="m_summary">This month vs last month</h2>
+    <div class="kpis" id="kpis" data-source="m_summary"></div>
+    <div class="muted">Spend is shown per day so a part month compares fairly with full ones. Arrows compare with the previous month.</div>
+  </section>
+
+  <section class="sec" id="trend">
+    <h2>Month by month</h2>
+    <div class="card"><div class="muted">Account totals per month. Reach is summed across ads, so it overcounts people who saw several ads.</div><div class="tw"><table id="tSummary" data-source="m_summary" data-row-key="month"></table></div></div>
+    <div class="grid2">
+      <div class="card"><h2>1-day ROAS by creative type</h2><div class="muted">Dashed line = account average each month. Hover for spend.</div><div class="chart" id="roasChart" data-source="m_buckets m_summary"></div><div class="legend" id="roasLegend"></div></div>
+      <div class="card"><h2>Spend mix by creative type</h2><div class="muted">Share of each month's spend. Is budget moving toward the types that earn?</div><div class="chart" id="mixChart" data-source="m_buckets"></div><div class="legend" id="mixLegend"></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="types">
+    <h2>Creative type scorecard</h2>
+    <div class="card"><div class="muted">Pick a month. Actions are written for the latest month, using its trend against the month before.</div>
+      <div class="tools"><select id="fTypeMonth"></select></div>
+      <div class="tw"><table id="tBuckets" data-source="m_buckets" data-row-key="key"></table></div></div>
+    <div class="card"><h2>Paid partnerships by creator tier</h2><div class="muted">Macro / Micro / Nano, every month.</div><div class="tw"><table id="tTiers" data-source="m_tiers" data-row-key="key"></table></div></div>
+  </section>
+
+  <section class="sec" id="winners">
+    <h2>Winning hooks, scripts and design themes</h2>
+    <div class="card"><div class="muted">Winner = spend ≥ ₹5k in the month and ROAS above that month's account average (hooks also need an above-median hook rate). Consistent winners beat the average in 2+ months. Attention leak = strong hook, weak ROAS.</div>
+      <div class="tools"><select id="fWinMonth"></select><select id="fWinKind"><option value="">All kinds</option></select></div>
+      <div class="tw"><table id="tWin" data-source="m_winners" data-row-key="key"></table></div></div>
+  </section>
+
+  <section class="sec" id="concepts">
+    <h2>Every concept, month by month</h2>
+    <div class="card"><div class="muted">Concepts with ₹2k+ total spend since July; copies and V1/V2/V3 cuts merged. Status is judged on the latest month against the month before. Links open the highest-spend copy.</div>
+      <div class="tools"><input id="q" type="search" placeholder="Search concept or angle"><select id="fBucket"><option value="">All types</option></select><select id="fStatus"></select></div>
+      <div class="tw"><table id="tCon" data-source="m_concepts" data-row-key="concept"></table></div></div>
+  </section>
+
+  <section class="sec" id="method">
+    <h2>How this is built</h2>
+    <div class="card muted">Same rules as the weekly review. Types come from the ad name: <b>Founder</b> = KD or Aayushi videos · <b>Expert</b> = Poornima videos · <b>Paid Partnership</b> = Partnership_Ad_Macro/Micro/Nano · <b>UGC</b> = names with UGC · <b>Product Video / Carousel</b> = other Video and Cara_ ads · <b>Static</b> = Image_ · <b>GIF</b> = Gif_. Revenue and purchases use 1-day click; impressions, link clicks and video plays use Meta's default (video plays are wrong under 1-day click). Hook = 3-sec plays ÷ impressions · Thru-play = ThruPlays ÷ impressions · Hold = ThruPlays ÷ 3-sec plays. Concept status: <b>New</b> first spend this month · <b>Scale</b> ≥ 1.2× avg ROAS · <b>Keep</b> ≥ avg · <b>Iterate</b> 0.6–1× · <b>Pause</b> &lt; 0.6× · <b>Fatiguing</b> ROAS down 30%+ MoM at ₹5k+ both months · <b>Paused winner</b> beat the average in an earlier month, now off · <b>Watch</b> under ₹5k this month.</div>
+  </section>
+</div>
+<script>
+(function(){
+const F = {
+  inr: v => v == null ? '—' : (v >= 1e5 ? '₹' + (v/1e5).toFixed(1) + 'L' : v >= 1e3 ? '₹' + (v/1e3).toFixed(1) + 'k' : '₹' + Math.round(v)),
+  x: v => v == null ? '—' : (+v).toFixed(2) + 'x',
+  pct: v => v == null ? '—' : (+v).toFixed(1) + '%',
+  rs: v => v == null ? '—' : '₹' + (+v).toFixed(1),
+  n: v => v == null ? '—' : Intl.NumberFormat('en-IN', {notation: 'compact', maximumFractionDigits: 1}).format(+v),
+  int: v => v == null ? '—' : d3.format(',')(+v),
+  t: v => v == null ? '' : String(v)
+};
+const ORDER = ["Founder","Expert","Paid Partnership","UGC","Product Video / Carousel","Static","GIF"];
+const col = b => dash.colors[ORDER.indexOf(b) % dash.colors.length];
+const sort = {};
+const ok = id => dash.data(id).status === 'ok';
+const rowsOf = id => ok(id) ? dash.data(id).data : [];
+const meta = () => ok('m_meta') ? dash.data('m_meta').data[0] : null;
+function fail(el){ el.textContent=''; const d=document.createElement('div'); d.className='fail'; d.append(document.createElement('i'), 'Failed to load'); el.append(d); }
+const bad = id => ['error','connect','declined'].includes(dash.data(id).status);
+
+function table(id, ds, cols, opts){
+  opts = opts || {};
+  const el = document.getElementById(id);
+  if (bad(ds)) { el.textContent=''; return fail(el.parentElement); }
+  el.textContent = '';
+  if (!ok(ds)) return;
+  let rows = rowsOf(ds).slice();
+  if (opts.filter) rows = rows.filter(opts.filter);
+  const s = sort[id] || opts.sort;
+  if (s) rows.sort((a,b) => { const x=a[s.k], y=b[s.k]; const c = (typeof x === 'number' || typeof y === 'number') ? ((x??-Infinity)-(y??-Infinity)) : String(x??'').localeCompare(String(y??'')); return s.d*c; });
+  if (opts.limit) rows = rows.slice(0, opts.limit);
+  const thead = el.createTHead().insertRow();
+  cols.forEach(c => {
+    const th = document.createElement('th'); th.dataset.field = c.k; th.textContent = c.h; if (c.l || c.links) th.className='l';
+    if (s && s.k === c.k) th.setAttribute('aria-sort', s.d > 0 ? 'ascending' : 'descending');
+    th.addEventListener('click', () => { sort[id] = {k: c.k, d: (sort[id] && sort[id].k === c.k) ? -sort[id].d : -1}; draw(); });
+    thead.append(th);
+  });
+  const tb = el.createTBody();
+  rows.forEach(row => {
+    const tr = tb.insertRow();
+    if (opts.key) tr.dataset.key = row[opts.key];
+    cols.forEach(c => {
+      const td = tr.insertCell();
+      if (c.links) {
+        td.className = 'lnk';
+        [['preview','Preview'],['ig','Instagram'],['manager','Ads Manager']].forEach(([k,label]) => {
+          const u = row[k]; if (!u || !/^https:\/\//.test(u)) return;
+          const a = document.createElement('a'); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = label; td.append(a);
+        });
+        return;
+      }
+      td.textContent = (F[c.f] || F.t)(row[c.k]);
+      if (c.l) td.className = 'l'; if (c.act) td.className = 'act';
+      if (c.tone) { const t = c.tone(row); if (t) td.classList.add(t); }
+    });
+  });
+  if (opts.limit && rowsOf(ds).length > opts.limit) {
+    const tr = tb.insertRow(); const td = tr.insertCell(); td.colSpan = cols.length; td.className='l muted';
+    td.textContent = `Showing the first ${opts.limit} rows — use search or filters to narrow down.`;
+  }
+}
+
+const avgOf = mo => { const s = rowsOf('m_summary').find(r => r.month === mo); return s ? s.roas : null; };
+const roasTone = r => { const a = avgOf(r.month || (meta() && meta().latest)); if (a == null || r.roas == null) return ''; return r.roas >= a*1.2 ? 'good' : r.roas < a*0.6 ? 'bad' : r.roas < a ? 'warn' : ''; };
+const statusTone = r => ({Scale:'good', New:'good', 'Paused winner':'warn', Iterate:'warn', Fatiguing:'bad', Pause:'bad'})[r.status] || '';
+
+function fillSelect(id, values, labels, first){
+  const el = document.getElementById(id);
+  if (el.dataset.filled) return;
+  if (first) el.append(new Option(first[1], first[0]));
+  values.forEach((v,i) => el.append(new Option(labels ? labels[i] : v, v)));
+  el.dataset.filled = '1';
+}
+
+function header(){
+  const m = meta(), r = document.getElementById('range');
+  if (m) { r.classList.remove('dash-skeleton'); r.textContent = `${m.months[0].label.split(' (')[0]} – ${m.months[m.months.length-1].label}`; }
+  const kp = document.getElementById('kpis'); kp.textContent='';
+  if (bad('m_summary')) return fail(kp);
+  const S = rowsOf('m_summary'); if (!S.length) return;
+  const cur = S[S.length-1], prv = S[S.length-2];
+  document.getElementById('kpiTitle').textContent = `${cur.label} vs ${prv ? prv.label : ''}`;
+  const tiles = [
+    ['Spend per day','spend_per_day','inr',+1,'Total ' + F.inr(cur.spend)],
+    ['1-day ROAS','roas','x',+1,'Revenue ÷ spend'],
+    ['CPM','cpm','rs',-1,'Per 1,000 impressions'],
+    ['Link-click CPC','cpc','rs',-1,'Spend ÷ link clicks'],
+    ['Hook rate','hook','pct',+1,'3-sec plays ÷ impressions'],
+    ['Thru-play rate','thru','pct',+1,'ThruPlays ÷ impressions'],
+    ['Hold rate','hold','pct',+1,'ThruPlays ÷ 3-sec plays'],
+    ['Live ads','ads','int',0,'Ads with spend this month']
+  ];
+  tiles.forEach(([lab,k,f,dir,note]) => {
+    const c = document.createElement('div'); c.className='card kpi';
+    const a = document.createElement('div'); a.className='muted'; a.textContent = lab;
+    const v = document.createElement('div'); v.className='v'; v.dataset.source='m_summary'; v.dataset.field=k; v.dataset.where='month='+cur.month; v.textContent = F[f](cur[k]);
+    const d = document.createElement('div'); d.className='d';
+    const mom = cur[k+'_mom'];
+    if (mom != null && dir !== 0) { d.textContent = (mom > 0 ? '▲ ' : '▼ ') + Math.abs(mom).toFixed(1) + '% vs ' + (prv ? prv.label.split(' (')[0] : ''); d.classList.add((mom*dir) >= 0 ? 'good' : 'bad'); }
+    else if (prv && dir === 0) { d.textContent = 'vs ' + prv[k] + ' last month'; d.classList.add('muted'); }
+    const n = document.createElement('div'); n.className='n'; n.textContent = note;
+    c.append(a,v,d,n); kp.append(c);
+  });
+}
+
+function takeaway(){
+  const el = document.getElementById('takeaway'), m = meta(), B = rowsOf('m_buckets');
+  if (!m || !B.length) { el.textContent=''; return; }
+  const live = B.filter(b => b.month === m.latest && b.spend >= 5000);
+  if (!live.length) { el.textContent=''; return; }
+  const best = live.slice().sort((a,b) => b.roas - a.roas)[0], worst = live.slice().sort((a,b) => a.roas - b.roas)[0];
+  const S = rowsOf('m_summary'), cur = S[S.length-1];
+  const prevB = B.find(b => b.month === m.prev && b.bucket === best.bucket);
+  el.textContent = `${cur.label}: account at ${F.x(cur.roas)}${cur.roas_mom != null ? ` (${cur.roas_mom > 0 ? '+' : ''}${cur.roas_mom}% MoM)` : ''}. ${best.bucket} leads at ${F.x(best.roas)} with ${best.spend_share}% of spend${prevB ? ` (${prevB.spend_share}% last month)` : ''} — keep shifting budget there. ${worst.bucket} trails at ${F.x(worst.roas)} on ${F.inr(worst.spend)} — cap it to its above-average ads.`;
+}
+
+function roasChart(){
+  const el = document.getElementById('roasChart'), lg = document.getElementById('roasLegend');
+  el.textContent=''; lg.textContent='';
+  if (bad('m_buckets')) return fail(el);
+  const m = meta(), B = rowsOf('m_buckets'), S = rowsOf('m_summary'); if (!m || !B.length || !S.length) return;
+  const months = m.months.map(x => x.key), lab = Object.fromEntries(m.months.map(x => [x.key, x.label.split(' (')[0] + (x.label.includes('MTD') ? '*' : '')]));
+  const series = ORDER.map(b => ({b, pts: months.map(mo => B.find(r => r.month === mo && r.bucket === b && r.spend >= 5000)).filter(Boolean)})).filter(s => s.pts.length);
+  const W = el.clientWidth || 420, H = 280, ml = 40, mr = 16, mt = 12, mb = 28;
+  const x = d3.scalePoint(months, [ml, W - mr]).padding(0.3);
+  const ymax = d3.max(B.filter(r => r.spend >= 5000), r => r.roas) || 1;
+  const y = d3.scaleLinear([0, ymax * 1.1], [H - mb, mt]).nice();
+  const svg = d3.select(el).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
+  y.ticks(5).forEach(t => { svg.append('line').attr('x1',ml).attr('x2',W-mr).attr('y1',y(t)).attr('y2',y(t)).attr('stroke','var(--cds-chart-grid)');
+    svg.append('text').attr('x',ml-6).attr('y',y(t)+4).attr('text-anchor','end').attr('font-size',11).attr('fill','var(--color-fg-muted)').text(t.toFixed(1)+'x'); });
+  months.forEach(mo => svg.append('text').attr('x',x(mo)).attr('y',H-8).attr('text-anchor','middle').attr('font-size',11).attr('fill','var(--color-fg-muted)').text(lab[mo]));
+  const avg = months.map(mo => ({mo, v: (S.find(s => s.month === mo) || {}).roas})).filter(d => d.v != null);
+  svg.append('path').attr('d', d3.line().x(d => x(d.mo)).y(d => y(d.v))(avg)).attr('fill','none').attr('stroke','var(--cds-chart-reference)').attr('stroke-dasharray','4 3').attr('stroke-width',1.5);
+  const tip = d3.select(el).append('div').attr('class','tip');
+  series.forEach(s => {
+    svg.append('path').attr('d', d3.line().x(d => x(d.month)).y(d => y(d.roas))(s.pts)).attr('fill','none').attr('stroke',col(s.b)).attr('stroke-width',2).attr('stroke-linecap','round').attr('stroke-linejoin','round');
+    s.pts.forEach(d => svg.append('circle').attr('cx',x(d.month)).attr('cy',y(d.roas)).attr('r',4).attr('fill',col(s.b))
+      .on('mousemove', ev => { const [mx,my] = d3.pointer(ev, el); tip.style('display','block').style('left',Math.min(mx+10, W-200)+'px').style('top',(my+10)+'px').text(`${d.bucket} · ${lab[d.month]}: ${F.x(d.roas)} on ${F.inr(d.spend)}`); })
+      .on('mouseleave', () => tip.style('display','none')));
+    const it = document.createElement('span'); const i = document.createElement('i'); i.style.background = col(s.b); it.append(i, s.b); lg.append(it);
+  });
+  const it = document.createElement('span'); it.textContent = '- - account average · * month to date · types under ₹5k in a month are hidden'; lg.append(it);
+}
+
+function mixChart(){
+  const el = document.getElementById('mixChart'), lg = document.getElementById('mixLegend');
+  el.textContent=''; lg.textContent='';
+  if (bad('m_buckets')) return fail(el);
+  const m = meta(), B = rowsOf('m_buckets'); if (!m || !B.length) return;
+  const months = m.months.map(x => x.key), lab = Object.fromEntries(m.months.map(x => [x.key, x.label.split(' (')[0] + (x.label.includes('MTD') ? '*' : '')]));
+  const W = el.clientWidth || 420, H = 280, ml = 36, mr = 8, mt = 8, mb = 28;
+  const x = d3.scaleBand(months, [ml, W - mr]).padding(0.35);
+  const y = d3.scaleLinear([0, 100], [H - mb, mt]);
+  const svg = d3.select(el).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
+  [0,25,50,75,100].forEach(t => svg.append('text').attr('x',ml-6).attr('y',y(t)+4).attr('text-anchor','end').attr('font-size',11).attr('fill','var(--color-fg-muted)').text(t+'%'));
+  const tip = d3.select(el).append('div').attr('class','tip');
+  months.forEach(mo => {
+    let acc = 0;
+    ORDER.forEach(b => {
+      const r = B.find(z => z.month === mo && z.bucket === b); if (!r || !r.spend_share) return;
+      const y0 = acc, y1 = acc + r.spend_share; acc = y1;
+      svg.append('rect').attr('x',x(mo)).attr('width',x.bandwidth()).attr('y',y(y1)).attr('height',Math.max(0,y(y0)-y(y1)-1)).attr('fill',col(b))
+        .on('mousemove', ev => { const [mx,my] = d3.pointer(ev, el); tip.style('display','block').style('left',Math.min(mx+10, W-220)+'px').style('top',(my+10)+'px').text(`${b} · ${lab[mo]}: ${r.spend_share}% of spend, ${r.rev_share}% of revenue`); })
+        .on('mouseleave', () => tip.style('display','none'));
+    });
+    svg.append('text').attr('x',x(mo)+x.bandwidth()/2).attr('y',H-8).attr('text-anchor','middle').attr('font-size',11).attr('fill','var(--color-fg-muted)').text(lab[mo]);
+  });
+  ORDER.filter(b => B.some(r => r.bucket === b)).forEach(b => { const it = document.createElement('span'); const i = document.createElement('i'); i.style.background = col(b); it.append(i, b); lg.append(it); });
+}
+
+function filters(){
+  const m = meta(); if (!m) return;
+  const keys = m.months.map(x => x.key), labels = m.months.map(x => x.label);
+  const tm = document.getElementById('fTypeMonth');
+  if (!tm.dataset.filled) { fillSelect('fTypeMonth', keys.slice().reverse(), labels.slice().reverse()); }
+  fillSelect('fWinMonth', ['all'].concat(keys.slice().reverse()), ['Consistent winners (all months)'].concat(labels.slice().reverse()), ['', 'All months']);
+  if (ok('m_winners')) fillSelect('fWinKind', [...new Set(rowsOf('m_winners').map(w => w.kind))]);
+  if (ok('m_concepts')) {
+    fillSelect('fBucket', ORDER.filter(b => rowsOf('m_concepts').some(c => c.bucket === b)));
+    fillSelect('fStatus', ['live','Scale','New','Keep','Iterate','Fatiguing','Pause','Watch','Paused winner','Off',''], ['Running this month','Scale','New','Keep','Iterate','Fatiguing','Pause','Watch','Paused winner','Off','All statuses']);
+  }
+}
+
+function draw(){
+  filters(); header(); takeaway(); roasChart(); mixChart();
+  const m = meta();
+  table('tSummary','m_summary',[{k:'label',h:'Month',l:1},{k:'spend',h:'Spend',f:'inr'},{k:'spend_per_day',h:'Spend/day',f:'inr'},{k:'ads',h:'Live ads',f:'int'},
+    {k:'reach',h:'Reach',f:'n'},{k:'cpm',h:'CPM',f:'rs'},{k:'cpc',h:'CPC',f:'rs'},{k:'roas',h:'1d ROAS',f:'x'},{k:'roas_mom',h:'ROAS MoM',f:'pct',tone:r=>r.roas_mom==null?'':r.roas_mom>=0?'good':'bad'},
+    {k:'hook',h:'Hook',f:'pct'},{k:'thru',h:'Thru-play',f:'pct'},{k:'hold',h:'Hold',f:'pct'}], {key:'month', sort:{k:'month',d:1}});
+  const tm = document.getElementById('fTypeMonth').value || (m && m.latest);
+  table('tBuckets','m_buckets',[{k:'bucket',h:'Type',l:1},{k:'ads',h:'Ads',f:'int'},{k:'spend',h:'Spend',f:'inr'},{k:'spend_share',h:'% spend',f:'pct'},{k:'rev_share',h:'% revenue',f:'pct'},
+    {k:'reach',h:'Reach',f:'n'},{k:'cpm',h:'CPM',f:'rs'},{k:'cpc',h:'CPC',f:'rs'},{k:'roas',h:'1d ROAS',f:'x',tone:roasTone},{k:'vs_avg',h:'vs avg',f:'x'},
+    {k:'hook',h:'Hook',f:'pct'},{k:'thru',h:'Thru-play',f:'pct'},{k:'hold',h:'Hold',f:'pct'},{k:'action',h:'Action (latest month)',act:1,l:1}],
+    {key:'key', filter: r => r.month === tm, sort:{k:'spend',d:-1}});
+  table('tTiers','m_tiers',[{k:'label',h:'Month',l:1},{k:'tier',h:'Tier',l:1},{k:'ads',h:'Ads',f:'int'},{k:'spend',h:'Spend',f:'inr'},{k:'cpm',h:'CPM',f:'rs'},{k:'cpc',h:'CPC',f:'rs'},
+    {k:'roas',h:'1d ROAS',f:'x',tone:roasTone},{k:'hook',h:'Hook',f:'pct'},{k:'hold',h:'Hold',f:'pct'}], {key:'key', sort:{k:'key',d:1}});
+  const wm = document.getElementById('fWinMonth').value, wk = document.getElementById('fWinKind').value;
+  table('tWin','m_winners',[{k:'label',h:'Month',l:1},{k:'kind',h:'What',l:1,tone:r=>r.kind==='Attention leak'?'bad':'good'},{k:'angle',h:'Hook / script / theme',l:1},{k:'preview',h:'Top ad',links:1},
+    {k:'group',h:'Type',l:1},{k:'spend',h:'Spend',f:'inr'},{k:'roas',h:'1d ROAS',f:'x'},{k:'hook',h:'Hook',f:'pct'},{k:'hold',h:'Hold',f:'pct'},{k:'cpc',h:'CPC',f:'rs'},{k:'action',h:'Action',act:1,l:1}],
+    {key:'key', filter: r => (!wm || r.month === wm) && (!wk || r.kind === wk)});
+  if (m) {
+    const q = document.getElementById('q').value.toLowerCase(), fb = document.getElementById('fBucket').value, fs = document.getElementById('fStatus').value;
+    const cols = [{k:'concept',h:'Ad concept',l:1},{k:'preview',h:'Links',links:1},{k:'bucket',h:'Type',l:1},{k:'angle',h:'Angle',l:1},{k:'status',h:'Status',l:1,tone:statusTone}];
+    m.months.forEach(mm => cols.push({k:'spend_'+mm.col, h:'Spend ' + mm.label.split(' (')[0].split(' ')[0] + (mm.label.includes('MTD') ? '*' : ''), f:'inr'}));
+    m.months.forEach(mm => cols.push({k:'roas_'+mm.col, h:'ROAS ' + mm.label.split(' (')[0].split(' ')[0] + (mm.label.includes('MTD') ? '*' : ''), f:'x'}));
+    cols.push({k:'hook_latest',h:'Hook (latest)',f:'pct'},{k:'hold_latest',h:'Hold (latest)',f:'pct'},{k:'total_spend',h:'Total spend',f:'inr'},{k:'total_roas',h:'Total ROAS',f:'x'},{k:'action',h:'Action',act:1,l:1});
+    table('tCon','m_concepts', cols, {limit: 300, filter: r => (!fb || r.bucket === fb) && (fs === '' || (fs === 'live' ? !['Off','Paused winner'].includes(r.status) : r.status === fs)) && (!q || (r.concept + ' ' + r.angle).toLowerCase().includes(q))});
+  }
+}
+['q','fBucket','fStatus','fTypeMonth','fWinMonth','fWinKind'].forEach(id => document.getElementById(id).addEventListener('input', draw));
+dash.onData(draw);
+const named = document.getElementById(location.hash.slice(1)); if (named) named.scrollIntoView();
+})();
+</script>

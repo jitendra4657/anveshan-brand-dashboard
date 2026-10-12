@@ -5,6 +5,7 @@ Weekly creative performance report, cut by creative type, refreshed every Monday
 Live dashboard: https://claude.ai/artifact/BXG4hsqFbcDbFrHWizH5C2 (private until shared)
 
 ## Folders
+- `monthly/` — month-on-month Meta-only version of this report (see its README)
 - `engine/engine.py` — classifies ads from their names and computes metrics, winners and verdicts → `report.json`
 - `engine/export.py` — turns `report.json` into the dashboard's data files (`data/*.json`) and appends `data/history.json`
 - `raw/` — the Windsor.ai pulls for the week (Meta Acqui 1-day click, Meta default-attribution video/clicks, ad links, Google Ads)
