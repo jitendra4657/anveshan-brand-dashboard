@@ -42,3 +42,6 @@ The hook/angle is the CamelCase phrase in the name (e.g. `IsYourOilTruelyColdPre
 
 ## Note
 This folder is public: `data/` and `raw/` include real spend, revenue and ROAS per ad.
+
+## Weekly updates
+Every Monday after 9:20 AM IST the scheduled run commits the new week's `data/` and `raw/` files here, so the git history doubles as a week-by-week archive.
