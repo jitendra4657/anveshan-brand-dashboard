@@ -1,0 +1,239 @@
+<style>
+.cr{font-family:var(--font-anthropic-sans);color:var(--color-fg);display:flex;flex-direction:column;gap:var(--cds-gap-xl)}
+.cr h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
+.cr h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-xs)}
+.cr .muted{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.cr .take{font-size:var(--cds-font-size-body);max-width:60rem;margin-top:var(--cds-gap-sm)}
+.cr .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9.5rem),1fr));gap:var(--cds-gap-md)}
+.cr .card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+.cr .kpi .v{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);font-variant-numeric:tabular-nums;margin-top:var(--cds-gap-xs)}
+.cr .kpi .n{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:var(--cds-gap-xs)}
+.cr .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr));gap:var(--cds-gap-md)}
+.cr .tw{overflow:auto;max-height:34rem;margin-top:var(--cds-gap-sm)}
+.cr table{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption);font-variant-numeric:tabular-nums}
+.cr th{position:sticky;top:0;background:var(--color-panel);text-align:right;font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted);padding:var(--cds-pad-xs) var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);white-space:nowrap;cursor:pointer}
+.cr td{text-align:right;padding:var(--cds-pad-xs) var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.cr th.l,.cr td.l{text-align:left}
+.cr td.lnk a{color:var(--color-fg);margin-right:var(--cds-gap-sm)} .cr td.lnk{text-align:left}
+.cr td.act{text-align:left;white-space:normal;min-width:16rem;max-width:26rem}
+.cr .good{color:var(--color-ok)} .cr .bad{color:var(--color-bad)} .cr .warn{color:var(--color-warn)}
+.cr .pill{display:inline-block;padding:0 var(--cds-pad-xs);border-radius:var(--cds-radius);border:1px solid var(--color-border-line)}
+.cr .tools{display:flex;gap:var(--cds-gap-sm);flex-wrap:wrap;margin-top:var(--cds-gap-sm)}
+.cr input,.cr select{font:inherit;font-size:var(--cds-font-size-caption);padding:var(--cds-pad-xs) var(--cds-pad-sm);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);background:var(--color-bg);color:var(--color-fg)}
+.cr .chart{position:relative;min-height:260px;margin-top:var(--cds-gap-sm)}
+.cr .tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);display:none}
+.cr .sec{display:flex;flex-direction:column;gap:var(--cds-gap-md)}
+.cr .fail{display:flex;align-items:center;justify-content:center;gap:var(--cds-gap-xs);color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);min-height:6rem}
+.cr .fail i{width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)}
+[data-dash-source-state=empty]{color:transparent}
+[data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow)}
+</style>
+<div class="cr">
+  <header>
+    <h1 id="top">Weekly creative review</h1>
+    <div class="muted"><span data-source="summary" data-field="week" data-row="0" class="dash-skeleton">—</span> · Meta Anveshan_Acqui (1-day click) + Google Ads · refreshed every Monday</div>
+    <p class="take" id="takeaway" data-source="meta_buckets summary"></p>
+  </header>
+
+  <section class="sec" id="headline">
+    <h2>Headline — Meta</h2>
+    <div class="kpis">
+      <div class="card kpi"><div class="muted">Spend</div><div class="v dash-skeleton" data-source="summary" data-field="meta_spend" data-row="0" data-f="inr">—</div><div class="n">Last week</div></div>
+      <div class="card kpi"><div class="muted">1-day ROAS</div><div class="v dash-skeleton" data-source="summary" data-field="meta_roas" data-row="0" data-f="x">—</div><div class="n">Revenue ÷ spend, 1-day click</div></div>
+      <div class="card kpi"><div class="muted">Reach</div><div class="v dash-skeleton" data-source="summary" data-field="meta_reach" data-row="0" data-f="n">—</div><div class="n">Summed across ads</div></div>
+      <div class="card kpi"><div class="muted">CPM</div><div class="v dash-skeleton" data-source="summary" data-field="meta_cpm" data-row="0" data-f="rs">—</div><div class="n">Per 1,000 impressions</div></div>
+      <div class="card kpi"><div class="muted">Link-click CPC</div><div class="v dash-skeleton" data-source="summary" data-field="meta_cpc" data-row="0" data-f="rs">—</div><div class="n">Spend ÷ link clicks</div></div>
+      <div class="card kpi"><div class="muted">Hook rate</div><div class="v dash-skeleton" data-source="summary" data-field="meta_hook" data-row="0" data-f="pct">—</div><div class="n">3-sec plays ÷ impressions</div></div>
+      <div class="card kpi"><div class="muted">Thru-play rate</div><div class="v dash-skeleton" data-source="summary" data-field="meta_thru" data-row="0" data-f="pct">—</div><div class="n">ThruPlays ÷ impressions</div></div>
+      <div class="card kpi"><div class="muted">Hold rate</div><div class="v dash-skeleton" data-source="summary" data-field="meta_hold" data-row="0" data-f="pct">—</div><div class="n">ThruPlays ÷ 3-sec plays</div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="buckets">
+    <h2>By creative type — Meta</h2>
+    <div class="grid2">
+      <div class="card"><h2>1-day ROAS by type</h2><div class="muted">Dashed line = account average. Bar width shows nothing; hover for spend.</div><div class="chart" id="roasChart" data-source="meta_buckets summary"></div></div>
+      <div class="card"><h2>Share of spend vs share of revenue</h2><div class="muted">Revenue share above spend share = type is pulling its weight.</div><div class="chart" id="shareChart" data-source="meta_buckets"></div></div>
+    </div>
+    <div class="card"><h2>Creative-type scorecard</h2><div class="muted">Each row: the number, then what to do about it.</div><div class="tw"><table id="tBuckets" data-source="meta_buckets" data-row-key="bucket"></table></div></div>
+    <div class="card"><h2>Paid partnerships by creator tier</h2><div class="muted">Macro / Micro / Nano from the ad name.</div><div class="tw"><table id="tTiers" data-source="meta_tiers" data-row-key="tier"></table></div></div>
+  </section>
+
+  <section class="sec" id="winners">
+    <h2>Winning hooks, scripts and design themes</h2>
+    <div class="card"><div class="muted">Winner = spend ≥ ₹5k and ROAS above the account average. Hooks also need an above-median hook rate. Attention leaks = strong hook, weak ROAS.</div><div class="tw"><table id="tWin" data-source="winners" data-row-key="kind,angle"></table></div></div>
+  </section>
+
+  <section class="sec" id="ads">
+    <h2>Every Meta concept</h2>
+    <div class="card"><div class="muted">Copies and V1/V2/V3 cuts of the same ad merged; links open the highest-spend copy. Click a header to sort.</div>
+      <div class="tools"><input id="q" type="search" placeholder="Search ad, angle, product"><select id="fBucket"><option value="">All types</option></select><select id="fVerdict"><option value="">All verdicts</option></select></div>
+      <div class="tw"><table id="tAds" data-source="meta_ads" data-row-key="concept"></table></div></div>
+  </section>
+
+  <section class="sec" id="google">
+    <h2>Google Ads</h2>
+    <div class="kpis">
+      <div class="card kpi"><div class="muted">Spend</div><div class="v dash-skeleton" data-source="summary" data-field="google_spend" data-row="0" data-f="inr">—</div><div class="n">Both accounts</div></div>
+      <div class="card kpi"><div class="muted">ROAS</div><div class="v dash-skeleton" data-source="summary" data-field="google_roas" data-row="0" data-f="x">—</div><div class="n">Google default attribution</div></div>
+    </div>
+    <div class="card"><h2>By campaign type</h2><div class="muted">Search, Shopping and PMax aren't creative-cut; Demand Gen and CTV are.</div><div class="tw"><table id="tGTypes" data-source="google_types" data-row-key="type"></table></div></div>
+    <div class="card"><h2>Video creatives (Demand Gen + CTV)</h2><div class="muted">Google video stats (hook/hold) aren't exposed per ad here, so these are judged on CPC and ROAS.</div><div class="tw"><table id="tGCre" data-source="google_creatives" data-row-key="platform,ad"></table></div></div>
+  </section>
+
+  <section class="sec" id="method">
+    <h2>How this is built</h2>
+    <div class="card muted">Types come from the ad-name convention: <b>Founder</b> = KD or Aayushi videos · <b>Expert</b> = Poornima videos · <b>Paid Partnership</b> = Partnership_Ad_Macro/Micro/Nano (Dr-named creators stay here) · <b>UGC</b> = names with UGC · <b>Product Video / Carousel</b> = other Video and Cara_ ads · <b>Static</b> = Image_ · <b>GIF</b> = Gif_. The hook / angle is the CamelCase phrase in the name (e.g. IsYourOilTruelyColdPressed). Meta revenue and purchases use 1-day click; impressions, link clicks and video plays use Meta's default. Verdicts: Scale ≥ 1.2× avg ROAS, Keep ≥ avg, Iterate ≥ 0.6× avg, Pause below that (all at ≥ ₹5k spend). Ads off-convention fall into Product / Static / GIF by format — name them by the convention to get them classified.</div>
+  </section>
+</div>
+<script>
+(function(){
+const F = {
+  inr: v => v == null ? '—' : (v >= 1e5 ? '₹' + (v/1e5).toFixed(1) + 'L' : v >= 1e3 ? '₹' + (v/1e3).toFixed(1) + 'k' : '₹' + Math.round(v)),
+  x: v => v == null ? '—' : (+v).toFixed(2) + 'x',
+  pct: v => v == null ? '—' : (+v).toFixed(1) + '%',
+  rs: v => v == null ? '—' : '₹' + (+v).toFixed(1),
+  n: v => v == null ? '—' : Intl.NumberFormat('en-IN', {notation: 'compact', maximumFractionDigits: 1}).format(+v),
+  int: v => v == null ? '—' : d3.format(',')(+v),
+  t: v => v == null ? '' : String(v)
+};
+const sort = {};
+function fail(el){ el.textContent=''; const d=document.createElement('div'); d.className='fail'; d.append(document.createElement('i'), 'Failed to load'); el.append(d); }
+
+function table(id, ds, cols, opts){
+  const el = document.getElementById(id), r = dash.data(ds);
+  if (r.status === 'error' || r.status === 'connect' || r.status === 'declined') { el.textContent=''; return fail(el.parentElement); }
+  el.textContent = '';
+  if (r.status !== 'ok') return;
+  let rows = r.data.slice();
+  if (opts && opts.filter) rows = rows.filter(opts.filter);
+  const s = sort[id];
+  if (s) rows.sort((a,b) => { const x=a[s.k], y=b[s.k]; const c = (typeof x === 'number' || typeof y === 'number') ? ((x??-Infinity)-(y??-Infinity)) : String(x??'').localeCompare(String(y??'')); return s.d*c; });
+  const thead = el.createTHead().insertRow();
+  cols.forEach(c => {
+    const th = document.createElement('th'); th.dataset.field = c.k; th.textContent = c.h; if (c.l) th.className='l';
+    if (s && s.k === c.k) th.setAttribute('aria-sort', s.d > 0 ? 'ascending' : 'descending');
+    th.addEventListener('click', () => { sort[id] = {k: c.k, d: (sort[id] && sort[id].k === c.k) ? -sort[id].d : -1}; draw(); });
+    thead.append(th);
+  });
+  const tb = el.createTBody();
+  rows.forEach(row => {
+    const tr = tb.insertRow();
+    cols.forEach(c => {
+      const td = tr.insertCell();
+      if (c.links) {
+        td.className = 'lnk';
+        [['preview','Preview'],['ig','Instagram'],['manager','Ads Manager']].forEach(([k,label]) => {
+          const u = row[k]; if (!u || !/^https:\/\//.test(u)) return;
+          const a = document.createElement('a'); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = label; td.append(a);
+        });
+        return;
+      }
+      td.textContent = (F[c.f] || F.t)(row[c.k]);
+      if (c.l) td.className = 'l'; if (c.act) td.className = 'act';
+      if (c.tone) { const t = c.tone(row); if (t) td.classList.add(t); }
+    });
+  });
+}
+
+const avg = () => { const s = dash.data('summary'); return s.status === 'ok' && s.data[0] ? +s.data[0].meta_roas : null; };
+const roasTone = r => { const a = avg(); if (a == null || r.roas == null) return ''; return r.roas >= a*1.2 ? 'good' : r.roas < a*0.6 ? 'bad' : r.roas < a ? 'warn' : ''; };
+const verdictTone = r => ({Scale:'good', Keep:'', Iterate:'warn', Pause:'bad'})[r.verdict] || '';
+
+function chartRoas(){
+  const el = document.getElementById('roasChart'), r = dash.data('meta_buckets'), a = avg();
+  el.textContent = '';
+  if (r.status === 'error' || r.status === 'connect') return fail(el);
+  if (r.status !== 'ok') return;
+  const rows = r.data.filter(d => d.roas != null && d.ads > 0);
+  const W = el.clientWidth || 400, rowH = 30, H = rows.length*rowH + 24;
+  const svg = d3.select(el).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
+  const lab = svg.append('g'); let lw = 0;
+  rows.forEach((d,i) => { const t = lab.append('text').attr('x',0).attr('y',i*rowH+rowH/2+4).attr('font-size',12).attr('fill','var(--color-fg-muted)').text(d.bucket); lw = Math.max(lw, t.node().getComputedTextLength()); });
+  const x0 = lw + 10, x = d3.scaleLinear([0, d3.max(rows, d => d.roas)*1.15 || 1], [x0, W-44]);
+  const tip = d3.select(el).append('div').attr('class','tip');
+  rows.forEach((d,i) => {
+    const y = i*rowH+6, col = a == null ? dash.colors[0] : d.roas >= a ? dash.colors[0] : 'var(--cds-chart-muted)';
+    svg.append('rect').attr('x',x0).attr('y',y).attr('height',rowH-12).attr('width',Math.max(1,x(d.roas)-x0)).attr('rx',4).attr('fill',col)
+      .on('mousemove', ev => { const [mx,my] = d3.pointer(ev, el); tip.style('display','block').style('left',Math.min(mx+10, W-170)+'px').style('top',(my+10)+'px').text(`${d.bucket}: ${F.x(d.roas)} on ${F.inr(d.spend)} (${d.ads} ads)`); })
+      .on('mouseleave', () => tip.style('display','none'));
+    svg.append('text').attr('x',x(d.roas)+6).attr('y',y+rowH/2-2).attr('font-size',12).attr('fill','var(--color-fg)').text(F.x(d.roas));
+  });
+  if (a != null) { svg.append('line').attr('x1',x(a)).attr('x2',x(a)).attr('y1',0).attr('y2',H-18).attr('stroke','var(--cds-chart-reference)').attr('stroke-dasharray','4 3');
+    svg.append('text').attr('x',x(a)).attr('y',H-4).attr('text-anchor','middle').attr('font-size',11).attr('fill','var(--color-fg-muted)').text('avg ' + F.x(a)); }
+}
+
+function chartShare(){
+  const el = document.getElementById('shareChart'), r = dash.data('meta_buckets');
+  el.textContent = '';
+  if (r.status === 'error' || r.status === 'connect') return fail(el);
+  if (r.status !== 'ok') return;
+  const rows = r.data.filter(d => d.ads > 0 && d.spend_share != null);
+  const W = el.clientWidth || 400, rowH = 34, H = rows.length*rowH + 30;
+  const svg = d3.select(el).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
+  let lw = 0; const lab = svg.append('g');
+  rows.forEach((d,i) => { const t = lab.append('text').attr('x',0).attr('y',i*rowH+rowH/2+2).attr('font-size',12).attr('fill','var(--color-fg-muted)').text(d.bucket); lw = Math.max(lw, t.node().getComputedTextLength()); });
+  const x0 = lw+10, x = d3.scaleLinear([0, d3.max(rows, d => Math.max(d.spend_share, d.rev_share))*1.15 || 1], [x0, W-44]);
+  rows.forEach((d,i) => { const y = i*rowH+5;
+    svg.append('rect').attr('x',x0).attr('y',y).attr('height',10).attr('width',Math.max(1,x(d.spend_share)-x0)).attr('rx',4).attr('fill','var(--cds-chart-muted)');
+    svg.append('rect').attr('x',x0).attr('y',y+13).attr('height',10).attr('width',Math.max(1,x(d.rev_share)-x0)).attr('rx',4).attr('fill',dash.colors[0]);
+    svg.append('text').attr('x',Math.max(x(d.spend_share),x(d.rev_share))+6).attr('y',y+18).attr('font-size',11).attr('fill','var(--color-fg)').text(`${d.spend_share}% → ${d.rev_share}%`);
+  });
+  const ly = H-8; svg.append('rect').attr('x',x0).attr('y',ly-9).attr('width',10).attr('height',10).attr('rx',2).attr('fill','var(--cds-chart-muted)');
+  svg.append('text').attr('x',x0+14).attr('y',ly).attr('font-size',11).attr('fill','var(--color-fg-muted)').text('Spend share');
+  svg.append('rect').attr('x',x0+100).attr('y',ly-9).attr('width',10).attr('height',10).attr('rx',2).attr('fill',dash.colors[0]);
+  svg.append('text').attr('x',x0+114).attr('y',ly).attr('font-size',11).attr('fill','var(--color-fg-muted)').text('Revenue share');
+}
+
+function kpis(){
+  document.querySelectorAll('.cr [data-f][data-source="summary"]').forEach(el => {
+    const r = dash.data('summary');
+    if (r.status === 'ok') { el.classList.remove('dash-skeleton'); el.textContent = F[el.dataset.f](r.data[0][el.dataset.field]); }
+    else if (r.status !== 'loading') { el.classList.remove('dash-skeleton'); el.textContent = '—'; }
+  });
+  const w = document.querySelector('[data-field="week"]'), r = dash.data('summary');
+  if (r.status === 'ok') { w.classList.remove('dash-skeleton'); w.textContent = r.data[0].week; }
+}
+
+function takeaway(){
+  const el = document.getElementById('takeaway'), b = dash.data('meta_buckets'), a = avg();
+  if (b.status !== 'ok' || a == null) { el.textContent=''; return; }
+  const live = b.data.filter(d => d.ads > 0 && d.spend >= 5000);
+  const best = live.slice().sort((p,q) => q.roas - p.roas)[0], worst = live.slice().sort((p,q) => p.roas - q.roas)[0];
+  el.textContent = `${best.bucket} is the strongest type at ${F.x(best.roas)} vs ${F.x(a)} average (${best.rev_share}% of revenue on ${best.spend_share}% of spend) — shift budget toward it. ${worst.bucket} is weakest at ${F.x(worst.roas)} on ${F.inr(worst.spend)} — cut to its above-average ads.`;
+}
+
+function fillFilters(){
+  const r = dash.data('meta_ads'); if (r.status !== 'ok') return;
+  const fb = document.getElementById('fBucket'), fv = document.getElementById('fVerdict');
+  if (fb.options.length > 1) return;
+  [...new Set(r.data.map(d => d.bucket))].forEach(v => fb.append(new Option(v, v)));
+  ['Scale','Keep','Iterate','Pause','Learning','Watch'].forEach(v => fv.append(new Option(v, v)));
+}
+
+function draw(){
+  kpis(); takeaway(); chartRoas(); chartShare(); fillFilters();
+  table('tBuckets','meta_buckets',[
+    {k:'bucket',h:'Type',l:1},{k:'ads',h:'Ads',f:'int'},{k:'spend',h:'Spend',f:'inr'},{k:'spend_share',h:'% spend',f:'pct'},{k:'rev_share',h:'% revenue',f:'pct'},
+    {k:'reach',h:'Reach',f:'n'},{k:'cpm',h:'CPM',f:'rs'},{k:'cpc',h:'CPC',f:'rs'},{k:'roas',h:'1d ROAS',f:'x',tone:roasTone},
+    {k:'hook',h:'Hook',f:'pct'},{k:'thru',h:'Thru-play',f:'pct'},{k:'hold',h:'Hold',f:'pct'},{k:'action',h:'Action',act:1,l:1}]);
+  table('tTiers','meta_tiers',[{k:'tier',h:'Tier',l:1},{k:'ads',h:'Ads',f:'int'},{k:'spend',h:'Spend',f:'inr'},{k:'cpm',h:'CPM',f:'rs'},{k:'cpc',h:'CPC',f:'rs'},
+    {k:'roas',h:'1d ROAS',f:'x',tone:roasTone},{k:'hook',h:'Hook',f:'pct'},{k:'hold',h:'Hold',f:'pct'},{k:'action',h:'Action',act:1,l:1}]);
+  table('tWin','winners',[{k:'kind',h:'What',l:1,tone:r=>r.kind==='Attention leak'?'bad':'good'},{k:'angle',h:'Hook / script / theme',l:1},{k:'preview',h:'Top ad',links:1,l:1},{k:'group',h:'Type',l:1},{k:'ads',h:'Ads',f:'int'},
+    {k:'spend',h:'Spend',f:'inr'},{k:'roas',h:'1d ROAS',f:'x'},{k:'hook',h:'Hook',f:'pct'},{k:'thru',h:'Thru-play',f:'pct'},{k:'hold',h:'Hold',f:'pct'},{k:'cpc',h:'CPC',f:'rs'},{k:'action',h:'Action',act:1,l:1}]);
+  const q = document.getElementById('q').value.toLowerCase(), fb = document.getElementById('fBucket').value, fv = document.getElementById('fVerdict').value;
+  table('tAds','meta_ads',[{k:'concept',h:'Ad concept',l:1},{k:'preview',h:'Links',links:1,l:1},{k:'bucket',h:'Type',l:1},{k:'angle',h:'Angle',l:1},{k:'category',h:'Cat.',l:1},{k:'spend',h:'Spend',f:'inr'},
+    {k:'reach',h:'Reach',f:'n'},{k:'cpm',h:'CPM',f:'rs'},{k:'cpc',h:'CPC',f:'rs'},{k:'roas',h:'1d ROAS',f:'x',tone:roasTone},{k:'hook',h:'Hook',f:'pct'},{k:'thru',h:'Thru',f:'pct'},
+    {k:'hold',h:'Hold',f:'pct'},{k:'verdict',h:'Verdict',l:1,tone:verdictTone},{k:'action',h:'Action',act:1,l:1}],
+    {filter: r => (!fb || r.bucket === fb) && (!fv || r.verdict === fv) && (!q || (r.concept + ' ' + r.angle).toLowerCase().includes(q))});
+  table('tGTypes','google_types',[{k:'type',h:'Campaign type',l:1},{k:'spend',h:'Spend',f:'inr'},{k:'imp',h:'Impr.',f:'n'},{k:'cpm',h:'CPM',f:'rs'},{k:'clk',h:'Clicks',f:'n'},
+    {k:'cpc',h:'CPC',f:'rs'},{k:'ctr',h:'CTR',f:'pct'},{k:'roas',h:'ROAS',f:'x'},{k:'action',h:'Action',act:1,l:1}]);
+  table('tGCre','google_creatives',[{k:'platform',h:'Type',l:1},{k:'ad',h:'Ad',l:1},{k:'bucket',h:'Bucket',l:1},{k:'spend',h:'Spend',f:'inr'},{k:'cpm',h:'CPM',f:'rs'},
+    {k:'cpc',h:'CPC',f:'rs'},{k:'ctr',h:'CTR',f:'pct'},{k:'roas',h:'ROAS',f:'x'},{k:'action',h:'Action',act:1,l:1}]);
+}
+window.__crDraw = draw;
+['q','fBucket','fVerdict'].forEach(id => document.getElementById(id).addEventListener('input', draw));
+dash.onData(draw);
+const named = document.getElementById(location.hash.slice(1)); if (named) named.scrollIntoView();
+})();
+</script>
