@@ -118,11 +118,21 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Oct 13, 2026 (last refreshed 14 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Oct 15, 2026 (last refreshed 15 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-10-15T14:13:11Z", "P. D.", 3, "Cold-pressed Virgin Coconut Oil", "", "As expected, I get the quality. Thank you", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-10-15T13:21:18Z", "S.", 3, "A2 Desi Cow Ghee", "", "Missing aroma. The aroma of a pure A2 ghee is missing. Without a good aroma of a pure ghee there is no point…", "M", "Taste / aroma below expectation", "", 0, 1],
+["2026-10-15T12:57:45Z", "H.", 2, "Amlaprash", "", "Good", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-10-15T10:28:42Z", "H. P.", 3, "Khapli Multigrain Atta", "", "As regards taste and softness, no noticeable difference. So far the taste and softness is…", "M", "Taste / aroma below expectation", "", 0, 1],
+["2026-10-15T08:45:16Z", "P. M.", 2, "Cold-Pressed Yellow Mustard Oil", "", "Ok", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-10-15T07:56:53Z", "S.", 1, "A2 Desi Cow Ghee", "", "", "G", "No comment", "", 0, 1],
+["2026-10-15T06:37:24Z", "S. S.", 2, "Khapli Multigrain Atta", "", "Nice, but roti becomes hard. Look into it. Otherwise it's really awesome", "M", "Product feedback (texture)", "", 0, 1],
+["2026-10-15T03:47:30Z", "Customer", 1, "Cold-Pressed Yellow Mustard Oil", "", "Excellent, very good", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-10-14T06:50:34Z", "X.", 2, "A2 Cow Ghee and Cold Pressed Groundnut Oil", "", "yess very okayish, blahhhh", "G", "Spam / gibberish", "", 0, 0],
+["2026-10-14T03:45:17Z", "V.", 1, "Jaggery Powder", "", "", "G", "No comment", "", 0, 1],
 ["2026-10-13T15:11:10Z", "H. M.", 3, "A2 Desi Cow Ghee", "", "", "G", "No comment", "", 0, 1],
 ["2026-10-13T14:12:07Z", "A.", 3, "Amlaprash", "", "Please use natural jaggery / gud (organic sugarcane, no pesticide) and offer a different pack size…", "M", "Product feedback (ingredients / pack size)", "", 0, 1],
 ["2026-10-13T12:09:20Z", "M. C.", 2, "A2 Desi Cow Ghee and A2 Gir Ghee Combo", "", "Courier service not at all good. Product quality is no doubt good but delivery… (updated from 3★ to 2★)", "M", "Delivery delay / courier", "", 0, 1],
@@ -134,7 +144,7 @@ const RAW = [
 ["2026-10-11T09:40:25Z", "S.", 3, "Cold-Pressed Almond Oil", "", "Glass bottle packaging could have been better for the cost; the lid wasn't…", "M", "Packaging", "", 0, 1],
 ["2026-10-11T09:34:53Z", "B. T.", 1, "A2 Desi Cow Ghee", "", "Bought the 2.5 kg dolchi 15 days ago and got black ghee. Very bad quality, old material", "H", "Food safety / off taste-smell", "", 0, 0],
 ["2026-10-11T04:57:15Z", "S. U.", 3, "A2 Gir Cow Ghee", "", "Decent product but quality dithering — using Anveshan ghee for 2–3 years but I can see the…", "M", "Batch inconsistency (repeat buyer)", "", 0, 1],
-["2026-10-11T04:41:45Z", "K. V.", 1, "A2 Desi Cow Ghee", "", "Ghee booked and not delivered.", "H", "Non-delivery / wrong item", "", 0, 0],
+["2026-10-11T04:41:45Z", "K. V.", 1, "A2 Desi Cow Ghee", "", "Ghee booked and not delivered. AWB [removed]", "H", "Non-delivery / wrong item", "", 0, 0],
 ["2026-10-10T10:43:23Z", "R. G.", 2, "Cold-Pressed Sunflower Oil", "", "Courier came on time but the oil can was torn and oil leaked", "M", "Packaging", "", 0, 1],
 ["2026-10-10T09:44:14Z", "G. T.", 1, "A2 Gir Cow Ghee", "", "Worst product. It's totally fake", "H", "Purity / authenticity", "", 0, 1],
 ["2026-10-10T07:37:00Z", "P.", 1, "Cold-Pressed Black Mustard Oil", "", "Poor delivery system. Very poor choice of delivery partners. Please charge us for delivery but…", "M", "Delivery delay / courier", "", 0, 1],
