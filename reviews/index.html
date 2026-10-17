@@ -87,7 +87,7 @@ footer{font-size:12.5px;color:var(--muted)}
 <header>
   <span class="eyebrow">Anveshan · D2C · Judge.me</span>
   <h1>Review Dashboard</h1>
-  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 15 Oct and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
+  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 16 Oct and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
 </header>
 
 <section class="buckets" id="buckets"></section>
@@ -118,11 +118,17 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Oct 15, 2026 (last refreshed 16 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Oct 17, 2026 (last refreshed 17 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-10-17T01:50:39Z", "T. S.", 1, "A2 Gir Cow Ghee", "", "Very unprofessional. Never received the order, despite repeated reminders", "H", "Non-delivery / wrong item", "", 0, 1],
+["2026-10-16T15:35:14Z", "A.", 1, "A2 Gir Cow Ghee", "", "Worst quality ghee — bad smell. First batch was okay, but the second order had an old-oil-like smell and unusual texture. Lost trust", "H", "Food safety / off taste-smell", "", 0, 0],
+["2026-10-16T13:26:03Z", "A.", 1, "A2 Desi Cow Ghee", "", "Zepto ad says the A2 cow ghee is sourced from Gir, desi cows and Surti buffalo — asks if the cow ghee contains buffalo milk (needed for Navratri puja / prasad)", "H", "Purity / authenticity", "", 0, 0],
+["2026-10-16T13:10:27Z", "S.", 1, "Cold-Pressed Black Mustard Oil", "", "", "G", "No comment", "", 0, 1],
+["2026-10-16T05:21:27Z", "V. M.", 1, "Cold-Pressed Sunflower Oil", "", "Courier updated false status and never delivered; had to collect the order from the courier himself. Many complaints to Anveshan, no fix, and the team stopped replying (2 reviews merged)", "H", "Complaint handling failure", "", 0, 1],
+["2026-10-16T05:19:29Z", "S. S.", 1, "Cold-Pressed Groundnut Oil", "", "Never got my recent order delivered. Waited more than 10 days after the delivery date… still did not…", "H", "Non-delivery / wrong item", "", 0, 1],
 ["2026-10-15T14:13:11Z", "P. D.", 3, "Cold-pressed Virgin Coconut Oil", "", "As expected, I get the quality. Thank you", "G", "Positive text, low star (mis-tap)", "", 0, 1],
 ["2026-10-15T13:21:18Z", "S.", 3, "A2 Desi Cow Ghee", "", "Missing aroma. The aroma of a pure A2 ghee is missing. Without a good aroma of a pure ghee there is no point…", "M", "Taste / aroma below expectation", "", 0, 1],
 ["2026-10-15T12:57:45Z", "H.", 2, "Amlaprash", "", "Good", "G", "Positive text, low star (mis-tap)", "", 0, 1],
