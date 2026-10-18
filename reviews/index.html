@@ -87,7 +87,7 @@ footer{font-size:12.5px;color:var(--muted)}
 <header>
   <span class="eyebrow">Anveshan · D2C · Judge.me</span>
   <h1>Review Dashboard</h1>
-  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 16 Oct and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
+  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 17 Oct and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
 </header>
 
 <section class="buckets" id="buckets"></section>
@@ -118,11 +118,14 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Oct 17, 2026 (last refreshed 17 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Oct 17, 2026 (last refreshed 18 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-10-17T18:12:22Z", "D. S.", 3, "A2 Gir Cow Ghee", "", "Not too good. Please give original ghee", "H", "Purity / authenticity", "", 0, 1],
+["2026-10-17T12:10:10Z", "V. J.", 1, "Cold-Pressed Sunflower Oil", "", "Transport issue — order reached on time but was not delivered to the door; courier asked him to collect it from their office as the parcel is big…", "M", "Delivery delay / courier", "", 0, 1],
+["2026-10-17T09:51:48Z", "S. K.", 1, "Cold-Pressed Sunflower Oil", "", "", "G", "No comment", "", 0, 1],
 ["2026-10-17T01:50:39Z", "T. S.", 1, "A2 Gir Cow Ghee", "", "Very unprofessional. Never received the order, despite repeated reminders", "H", "Non-delivery / wrong item", "", 0, 1],
 ["2026-10-16T15:35:14Z", "A.", 1, "A2 Gir Cow Ghee", "", "Worst quality ghee — bad smell. First batch was okay, but the second order had an old-oil-like smell and unusual texture. Lost trust", "H", "Food safety / off taste-smell", "", 0, 0],
 ["2026-10-16T13:26:03Z", "A.", 1, "A2 Desi Cow Ghee", "", "Zepto ad says the A2 cow ghee is sourced from Gir, desi cows and Surti buffalo — asks if the cow ghee contains buffalo milk (needed for Navratri puja / prasad)", "H", "Purity / authenticity", "", 0, 0],
@@ -256,7 +259,7 @@ const RAW = [
 ["2026-09-15T14:25:02Z", "K. J.", 2, "Cold-Pressed Groundnut Oil", "", "One bottle was leaking", "M", "Packaging", "", 0, 1],
 ["2026-09-15T12:49:57Z", "S. A.", 1, "Wild Forest Honey", "", "Very good product, very nice, I am very happy", "G", "Positive text, low star (mis-tap)", "", 0, 1]
 ];
-const NEW = "2026-10-15T14:13:11Z";
+const NEW = "2026-10-17T01:50:39Z";
 const B = {H:{name:"Highly critical",cls:"crit"},M:{name:"Moderate",cls:"mod"},G:{name:"Generic",cls:"gen"}};
 const R = RAW.map(r=>({ts:r[0],name:r[1],stars:r[2],product:r[3],order:r[4],text:r[5],b:r[6],theme:r[7],thread:r[8],picked:!!r[9],verified:!!r[10]}));
 const fmt = ts => new Date(ts).toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"Asia/Kolkata"});
