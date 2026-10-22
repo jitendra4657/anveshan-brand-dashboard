@@ -118,11 +118,13 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Oct 21, 2026 (last refreshed 21 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Oct 21, 2026 (last refreshed 22 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-10-21T15:45:30Z", "M. M.", 3, "A2 Desi Cow Ghee", "", "Nothing different from my previous brand. I tried your ghee in anticipation of good quality — taste and…", "M", "Taste / aroma below expectation", "", 0, 1],
+["2026-10-21T13:54:40Z", "S.", 1, "Amlaprash", "", "I didn't receive my order", "H", "Non-delivery / wrong item", "", 0, 1],
 ["2026-10-21T08:25:42Z", "S. S.", 2, "Cold-Pressed Coconut Oil", "", "", "G", "No comment", "", 0, 1],
 ["2026-10-21T04:40:58Z", "S. Q.", 3, "Bilona-Churned Desi Buffalo Ghee", "", "Not good quality. First order was the best, but the 2nd order ghee is not good quality", "M", "Batch inconsistency (repeat buyer)", "", 0, 1],
 ["2026-10-20T18:35:33Z", "S.", 1, "Cold-pressed Virgin Coconut Oil", "", "Poor delivery partner — still not received 2 weeks past the delivery date; Delhivery performing poorly, unsure when items will arrive", "H", "Non-delivery / wrong item", "", 1, 1],
@@ -135,7 +137,7 @@ const RAW = [
 ["2026-10-17T18:12:22Z", "D. S.", 3, "A2 Gir Cow Ghee", "", "Not too good. Please give original ghee", "H", "Purity / authenticity", "", 0, 1],
 ["2026-10-17T12:10:10Z", "V. J.", 1, "Cold-Pressed Sunflower Oil", "", "Transport issue — order reached on time but was not delivered to the door; courier asked him to collect it from their office as the parcel is big…", "M", "Delivery delay / courier", "", 0, 1],
 ["2026-10-17T09:51:48Z", "S. K.", 1, "Cold-Pressed Sunflower Oil", "", "", "G", "No comment", "", 0, 1],
-["2026-10-17T01:50:39Z", "T. S.", 1, "A2 Gir Cow Ghee", "", "Very unprofessional. Never received the order, despite repeated reminders", "H", "Non-delivery / wrong item", "", 0, 1],
+["2026-10-17T01:50:39Z", "T. S.", 1, "A2 Gir Cow Ghee", "", "Very unprofessional. Never received the order, despite repeated reminders", "H", "Non-delivery / wrong item", "", 1, 1],
 ["2026-10-16T15:35:14Z", "A.", 1, "A2 Gir Cow Ghee", "", "Worst quality ghee — bad smell. First batch was okay, but the second order had an old-oil-like smell and unusual texture. Lost trust", "H", "Food safety / off taste-smell", "", 0, 0],
 ["2026-10-16T13:26:03Z", "A.", 1, "A2 Desi Cow Ghee", "", "Zepto ad says the A2 cow ghee is sourced from Gir, desi cows and Surti buffalo — asks if the cow ghee contains buffalo milk (needed for Navratri puja / prasad)", "H", "Purity / authenticity", "", 0, 0],
 ["2026-10-16T13:10:27Z", "S.", 1, "Cold-Pressed Black Mustard Oil", "", "", "G", "No comment", "", 0, 1],
@@ -268,7 +270,7 @@ const RAW = [
 ["2026-09-15T14:25:02Z", "K. J.", 2, "Cold-Pressed Groundnut Oil", "", "One bottle was leaking", "M", "Packaging", "", 0, 1],
 ["2026-09-15T12:49:57Z", "S. A.", 1, "Wild Forest Honey", "", "Very good product, very nice, I am very happy", "G", "Positive text, low star (mis-tap)", "", 0, 1]
 ];
-const NEW = "2026-10-20T18:35:33Z";
+const NEW = "2026-10-21T08:25:42Z";
 const B = {H:{name:"Highly critical",cls:"crit"},M:{name:"Moderate",cls:"mod"},G:{name:"Generic",cls:"gen"}};
 const R = RAW.map(r=>({ts:r[0],name:r[1],stars:r[2],product:r[3],order:r[4],text:r[5],b:r[6],theme:r[7],thread:r[8],picked:!!r[9],verified:!!r[10]}));
 const fmt = ts => new Date(ts).toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"Asia/Kolkata"});
