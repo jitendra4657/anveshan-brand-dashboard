@@ -87,7 +87,7 @@ footer{font-size:12.5px;color:var(--muted)}
 <header>
   <span class="eyebrow">Anveshan · D2C · Judge.me</span>
   <h1>Review Dashboard</h1>
-  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 22 Oct and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
+  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 23 Oct and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
 </header>
 
 <section class="buckets" id="buckets"></section>
@@ -118,11 +118,19 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Oct 22, 2026 (last refreshed 23 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Oct 24, 2026 (last refreshed 24 Oct 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-10-24T01:59:33Z", "R. S.", 1, "Cold-Pressed Sunflower Oil", "", "Good products. Good products and purity is excellent", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-10-23T18:27:13Z", "M. P.", 1, "Wild Forest Honey", "", "Please stop spamming. Your products are great but your messages over WhatsApp and emails for ratings…", "M", "CRM / email data issue", "", 0, 1],
+["2026-10-23T15:21:58Z", "A.", 3, "Wild Forest Honey", "", "This is good, but make it completely pure & safe, suitable for small children and…", "M", "Product feedback (purity / kid-safe)", "", 0, 1],
+["2026-10-23T14:39:17Z", "P. S.", 2, "High Protein Atta", "", "Well and good. I want to order again — how can we do it please", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-10-23T13:48:11Z", "N.", 1, "Cold-Pressed Yellow Mustard Oil", "", "Very disappointed. Torn atta bag and spilling oil", "M", "Packaging", "", 0, 1],
+["2026-10-23T13:21:09Z", "S.", 2, "Amlaprash", "", "I think this is not good as mentioned, because no effect so far", "M", "Product feedback (efficacy)", "", 0, 1],
+["2026-10-23T07:11:20Z", "M. K.", 3, "A2 Desi Cow Ghee and A2 Gir Ghee Combo", "", "Finding it too costly. It's not value for money", "M", "Price vs value", "", 0, 1],
+["2026-10-23T04:37:06Z", "D. B.", 1, "A2 Desi Cow Ghee", "", "Pathetic service. Till date I have not received my complete order; after several intimations it has…", "H", "Non-delivery / wrong item", "", 0, 1],
 ["2026-10-22T09:49:17Z", "A. S.", 3, "Amlaprash", "", "", "G", "No comment", "", 0, 1],
 ["2026-10-22T08:45:37Z", "P.", 1, "Cold-Pressed Groundnut Oil", "", "Good quality. Seems very original — don't compromise on your process even in future…", "G", "Positive text, low star (mis-tap)", "", 0, 1],
 ["2026-10-22T08:10:01Z", "B. C.", 1, "A2 Desi Cow Ghee", "", "Useless ghee, quality is not good, doesn't seem pure (translated from Hindi)", "H", "Purity / authenticity", "", 0, 0],
@@ -274,7 +282,7 @@ const RAW = [
 ["2026-09-15T14:25:02Z", "K. J.", 2, "Cold-Pressed Groundnut Oil", "", "One bottle was leaking", "M", "Packaging", "", 0, 1],
 ["2026-09-15T12:49:57Z", "S. A.", 1, "Wild Forest Honey", "", "Very good product, very nice, I am very happy", "G", "Positive text, low star (mis-tap)", "", 0, 1]
 ];
-const NEW = "2026-10-21T15:45:30Z";
+const NEW = "2026-10-22T09:49:17Z";
 const B = {H:{name:"Highly critical",cls:"crit"},M:{name:"Moderate",cls:"mod"},G:{name:"Generic",cls:"gen"}};
 const R = RAW.map(r=>({ts:r[0],name:r[1],stars:r[2],product:r[3],order:r[4],text:r[5],b:r[6],theme:r[7],thread:r[8],picked:!!r[9],verified:!!r[10]}));
 const fmt = ts => new Date(ts).toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"Asia/Kolkata"});
@@ -355,7 +363,5 @@ document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value
 document.getElementById("unassigned").addEventListener("change",e=>{state.un=e.target.checked;render()});
 render();
 </script>
-
-
 </body>
 </html>
