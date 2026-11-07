@@ -87,7 +87,7 @@ footer{font-size:12.5px;color:var(--muted)}
 <header>
   <span class="eyebrow">Anveshan · D2C · Judge.me</span>
   <h1>Review Dashboard</h1>
-  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 5 Nov (08:53) and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
+  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 6 Nov (08:53) and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
 </header>
 
 <section class="buckets" id="buckets"></section>
@@ -118,11 +118,18 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Nov 5, 2026 (last refreshed 6 Nov 2026, 08:53 IST). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Nov 7, 2026 (last refreshed 7 Nov 2026, 08:53 IST). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-11-07T02:47:19Z","S. P.",1,"Cold-Pressed Groundnut Oil","","Good","G","Positive text, low star (mis-tap)","",0,1],
+["2026-11-06T18:35:13Z","H.",1,"A2 Desi Cow Ghee","","","G","No comment","",0,1],
+["2026-11-06T16:25:36Z","L. S.",3,"A2 Desi Cow Ghee and A2 Gir Ghee Combo","","","G","No comment","",0,1],
+["2026-11-06T13:44:35Z","B. M.",1,"Cold-Pressed Black Mustard Oil","","Good packing and material, so good. Awesome","G","Positive text, low star (mis-tap)","",0,1],
+["2026-11-06T12:05:23Z","M. V.",2,"Anveshan (store)","","A2 ghee doesn't taste like real A2 ghee — from a family that kept cattle; another source's A2 ghee tastes and smells the way it should. Only the packaging and steel can are good","H","Purity / authenticity","",0,0],
+["2026-11-06T10:52:00Z","S.",3,"Cold-pressed Virgin Coconut Oil","","Packaging — when ordering 2 bottles, the two are always packed in reverse directions; openings should face the same way to avoid spillage","M","Packaging","",0,1],
+["2026-11-06T10:06:26Z","C. P.",1,"Khapli Multigrain Atta","","Multigrain Atta!!! Good product!!! Must try","G","Positive text, low star (mis-tap)","",0,1],
 ["2026-11-05T17:52:06Z","B.",1,"Amlaprash","","Really loved it. Taste good, not too sweet","G","Positive text, low star (mis-tap)","",0,1],
 ["2026-11-05T15:23:41Z","A. P.",1,"Anveshan (store)","","If you can't manage your logistics you shouldn't be taking orders. Disappointing experience","M","Delivery delay / courier","",0,0],
 ["2026-11-05T10:41:10Z","R.",1,"Cold-Pressed Black Mustard Oil","","First 1 L order felt pure, but the second (2 L) order doesn't feel pure (translated from Hindi)","H","Purity / authenticity","",0,1],
@@ -343,7 +350,7 @@ const RAW = [
 ["2026-09-15T14:25:02Z","K. J.",2,"Cold-Pressed Groundnut Oil","","One bottle was leaking","M","Packaging","",0,1],
 ["2026-09-15T12:49:57Z","S. A.",1,"Wild Forest Honey","","Very good product, very nice, I am very happy","G","Positive text, low star (mis-tap)","",0,1]
 ];
-const NEW = "2026-11-04T20:07:53Z";
+const NEW = "2026-11-05T17:52:06Z";
 const B = {H:{name:"Highly critical",cls:"crit"},M:{name:"Moderate",cls:"mod"},G:{name:"Generic",cls:"gen"}};
 const R = RAW.map(r=>({ts:r[0],name:r[1],stars:r[2],product:r[3],order:r[4],text:r[5],b:r[6],theme:r[7],thread:r[8],picked:!!r[9],verified:!!r[10]}));
 const fmt = ts => new Date(ts).toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"Asia/Kolkata"});
