@@ -10,6 +10,7 @@
 
 
 
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
@@ -91,7 +92,7 @@ footer{font-size:12.5px;color:var(--muted)}
 <header>
   <span class="eyebrow">Anveshan · D2C · Judge.me</span>
   <h1>Review Dashboard</h1>
-  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 16 Nov (08:54) and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
+  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 17 Nov (08:53) and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
 </header>
 
 <section class="buckets" id="buckets"></section>
@@ -122,11 +123,26 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Nov 17, 2026 (last refreshed 17 Nov 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Nov 18, 2026 (last refreshed 18 Nov 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-11-18T01:14:22Z", "R. S.", 1, "Cold-Pressed Yellow Mustard Oil", "", "It seems adulterated — has used Anveshan oils and ghee for a while, but quality has degraded significantly. Will not buy the oils in future", "H", "Purity / authenticity", "", 0, 1],
+["2026-11-17T19:12:57Z", "M. M.", 1, "Khapli Aata 5 Kg Combo Pack of 2", "", "Unsatisfactory response & service — bags arrived rat-eaten and leaking; nobody bothering, long email procedures to raise the issue. Wants issues handled on WhatsApp/call like orders are", "H", "Damaged / unsafe packaging", "", 0, 1],
+["2026-11-17T18:37:45Z", "I. G.", 1, "Bilona-Churned Desi Buffalo Ghee", "", "", "G", "No comment", "", 0, 1],
+["2026-11-17T17:32:08Z", "H. S.", 1, "Bilona-Churned Desi Buffalo Ghee", "", "Good — very good", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-11-17T13:44:10Z", "S.", 1, "Bilona-Churned Desi Buffalo Ghee", "", "", "G", "No comment", "", 0, 1],
+["2026-11-17T12:11:45Z", "C. V.", 1, "Wild Forest Honey", "", "", "G", "No comment", "", 0, 1],
+["2026-11-17T12:01:51Z", "J. B.", 1, "Cold-Pressed Groundnut Oil", "", "Not value for money — bad product and bad service by the team, no response on the issue", "H", "Complaint handling failure", "", 0, 1],
+["2026-11-17T11:23:20Z", "L. P.", 1, "Khapli Multigrain Atta", "", "Good product — quality & taste are super, but price-wise costly", "M", "Price vs value", "", 0, 1],
+["2026-11-17T10:32:26Z", "S. B.", 3, "Khapli Multigrain Atta", "", "Good for hot chapatis — if you eat them later they dry out", "M", "Product feedback (texture)", "", 0, 1],
+["2026-11-17T10:25:33Z", "B. B.", 1, "Cold-Pressed Black Mustard Oil", "", "Genuine mustard oil. Rich aroma", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-11-17T09:36:04Z", "H. M.", 1, "A2 Desi Cow Ghee", "", "Order still hasn't reached — not received even after 20 days", "H", "Non-delivery / wrong item", "", 0, 1],
+["2026-11-17T09:09:12Z", "A. S.", 3, "Wild Forest Honey", "", "Quality average — there is no quality measure showing whether it's real wild honey or not", "M", "Product feedback (lab report request)", "", 0, 1],
+["2026-11-17T06:54:54Z", "G. R.", 1, "Dry Fruit Paak Tin Can", "", "Order still pending since 5 Nov 2026 — asks why it hasn't been delivered till date", "H", "Non-delivery / wrong item", "", 0, 1],
+["2026-11-17T04:59:11Z", "C. P.", 2, "A2 Gir Cow Ghee", "", "Has been using this ghee for some time and found it up to the mark", "G", "Positive text, low star (mis-tap)", "", 0, 1],
+["2026-11-17T03:39:46Z", "R.", 1, "Bilona-Churned Desi Buffalo Ghee", "", "Overpriced, fake-quality ghee — the 2.5 L felt like Dalda, not pure ghee. Complained twice by email but tickets were closed unsolved. Never buying again; tells others to check reviews first", "H", "Purity / authenticity", "", 0, 0],
 ["2026-11-17T03:17:31Z", "P.", 1, "A2 Gir Cow Ghee", "", "Didn't find it authentic — not worth the price as we didn't find it pure", "H", "Purity / authenticity", "", 0, 1],
 ["2026-11-17T03:17:29Z", "S. D.", 1, "Cold-Pressed Groundnut Oil", "", "Poor packaging", "M", "Packaging", "", 0, 1],
 ["2026-11-17T02:44:37Z", "P. D.", 1, "Cold-Pressed Groundnut Oil", "", "No delivery — Xpressbees doesn't attempt door delivery but marks it 'delivery not done'. Not received even after 3 weeks; asks to change the delivery agency", "H", "Non-delivery / wrong item", "", 0, 1],
@@ -450,7 +466,7 @@ const RAW = [
 ["2026-09-15T14:25:02Z", "K. J.", 2, "Cold-Pressed Groundnut Oil", "", "One bottle was leaking", "M", "Packaging", "", 0, 1],
 ["2026-09-15T12:49:57Z", "S. A.", 1, "Wild Forest Honey", "", "Very good product, very nice, I am very happy", "G", "Positive text, low star (mis-tap)", "", 0, 1]
 ];
-const NEW = "2026-11-15T12:35:45Z";
+const NEW = "2026-11-17T03:17:31Z";
 const B = {H:{name:"Highly critical",cls:"crit"},M:{name:"Moderate",cls:"mod"},G:{name:"Generic",cls:"gen"}};
 const R = RAW.map(r=>({ts:r[0],name:r[1],stars:r[2],product:r[3],order:r[4],text:r[5],b:r[6],theme:r[7],thread:r[8],picked:!!r[9],verified:!!r[10]}));
 const fmt = ts => new Date(ts).toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"Asia/Kolkata"});
@@ -531,6 +547,7 @@ document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value
 document.getElementById("unassigned").addEventListener("change",e=>{state.un=e.target.checked;render()});
 render();
 </script>
+
 
 
 
