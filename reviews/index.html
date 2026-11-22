@@ -87,7 +87,7 @@ footer{font-size:12.5px;color:var(--muted)}
 <header>
   <span class="eyebrow">Anveshan · D2C · Judge.me</span>
   <h1>Review Dashboard</h1>
-  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 20 Nov (08:53) and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
+  <p class="sub">All <span class="num" id="total"></span> Judge.me reviews received from <span id="range"></span>, sorted into three buckets. <span class="num" id="newc"></span> arrived since the last refresh on 21 Nov (08:53) and are tagged New. Highly critical means food safety, purity, non-delivery, churn or abuse. Moderate means a fixable service or quality gripe. Generic means no actionable complaint.</p>
 </header>
 
 <section class="buckets" id="buckets"></section>
@@ -118,11 +118,23 @@ footer{font-size:12.5px;color:var(--muted)}
   <div class="list" id="list"></div>
 </section>
 
-<footer>Source: Judge.me review notifications, Sep 15 – Nov 21, 2026 (last refreshed 21 Nov 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
+<footer>Source: Judge.me review notifications, Sep 15 – Nov 22, 2026 (last refreshed 22 Nov 2026). Customer names are shortened to initials and order numbers are removed. "Picked up" means the CX team replied internally on the review. Review text is cut where Judge.me's email preview cuts it. Classification by Claude from the review text and rating.</footer>
 </div>
 
 <script>
 const RAW = [
+["2026-11-22T01:06:54Z","P. K.",3,"Khapli Multigrain Atta","","Quality","M","Other / unclear complaint","",0,1],
+["2026-11-22T00:58:42Z","S. O.",2,"Khapli Multigrain Atta","","Good quality","G","Positive text, low star (mis-tap)","",0,1],
+["2026-11-22T00:38:39Z","K.",3,"A2 Desi Cow Ghee and A2 Gir Ghee Combo","","Products are good, but back-end support is not easily reachable","M","Support reachability","",0,1],
+["2026-11-21T17:43:16Z","P. K.",2,"Cold-Pressed Groundnut Oil","","Bad packaging","M","Packaging","",0,1],
+["2026-11-21T15:35:14Z","S. P.",1,"Wild Forest Honey","","No reviews at all — repeat (second) order of 10 kg Khapli wheat flour placed some 22 days ago still not delivered","H","Non-delivery / wrong item","",0,1],
+["2026-11-21T14:35:27Z","B.",2,"Cold-Pressed Black Mustard Oil","","","G","No comment","",0,1],
+["2026-11-21T13:26:34Z","P.",1,"A2 Desi Cow Ghee","","","G","No comment","",0,1],
+["2026-11-21T13:02:18Z","S. R.",1,"Cold-Pressed Black Mustard Oil","","Very good","G","Positive text, low star (mis-tap)","",0,1],
+["2026-11-21T12:19:47Z","S.",1,"A2 Desi Cow Ghee","","","G","No comment","",0,1],
+["2026-11-21T10:08:19Z","S. K.",1,"Cold-Pressed Black Mustard Oil","","Oil was very good — the product was very good, good packaging","G","Positive text, low star (mis-tap)","",0,1],
+["2026-11-21T09:16:35Z","S.",2,"Cold-Pressed Black Mustard Oil","","Please keep checking your stocks for duplicacy — always keep rechecking your stocks at different…","H","Purity / authenticity","",0,1],
+["2026-11-21T06:33:00Z","A. D.",1,"Cold-Pressed Khapli Atta","","I still have not got my order — very sad on the part of such a big brand that they scam people…","H","Non-delivery / wrong item","",0,1],
 ["2026-11-20T19:01:47Z","S. S.",1,"A2 Gir Cow Ghee","","Not satisfied — delivery was delayed, the packet arrived open with wheat flour all over the box, and the mfg date is August","H","Damaged / unsafe packaging","",0,1],
 ["2026-11-20T18:24:51Z","J. V.",1,"Cold-Pressed Groundnut Oil","","Product not delivered","H","Non-delivery / wrong item","",0,1],
 ["2026-11-20T17:12:37Z","M. P.",1,"Bilona-Churned Desi Buffalo Ghee","","Customer support is zero — the company has no customer care number and doesn't reply","H","Complaint handling failure","",0,1],
@@ -501,7 +513,7 @@ const RAW = [
 ["2026-09-15T14:25:02Z","K. J.",2,"Cold-Pressed Groundnut Oil","","One bottle was leaking","M","Packaging","",0,1],
 ["2026-09-15T12:49:57Z","S. A.",1,"Wild Forest Honey","","Very good product, very nice, I am very happy","G","Positive text, low star (mis-tap)","",0,1]
 ];
-const NEW = "2026-11-20T02:43:12Z";
+const NEW = "2026-11-20T19:01:47Z";
 const B = {H:{name:"Highly critical",cls:"crit"},M:{name:"Moderate",cls:"mod"},G:{name:"Generic",cls:"gen"}};
 const R = RAW.map(r=>({ts:r[0],name:r[1],stars:r[2],product:r[3],order:r[4],text:r[5],b:r[6],theme:r[7],thread:r[8],picked:!!r[9],verified:!!r[10]}));
 const fmt = ts => new Date(ts).toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"Asia/Kolkata"});
